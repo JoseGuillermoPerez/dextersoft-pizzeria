@@ -1,9 +1,10 @@
 package com.dextersoft.pizzeria.persistence.repository;
 
-import com.dextersoft.pizzeria.persistence.entity.PizzaEntity;
+import com.dextersoft.pizzeria.persistence.entity.OrderEntity;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PizzaRepository extends ListCrudRepository<PizzaEntity, Integer> {
+public interface OrderRepository extends ListCrudRepository<OrderEntity, Integer> {
+
 }
