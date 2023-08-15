@@ -56,4 +56,13 @@ public class PizzaService {
     return this.pizzaRepository.existsById(idPizza);
   }
 
+  public PizzaEntity getNameFirst(String name) {
+    return this.pizzaRepository.findFirstByAvailableTrueAndNameIgnoreCase(name)
+        .orElseThrow(() -> new RuntimeException("La pizza no existe"));
+  }
+
+  public List<PizzaEntity> getCheapest(double price) {
+    return this.pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceDesc(price);
+  }
+
 }
