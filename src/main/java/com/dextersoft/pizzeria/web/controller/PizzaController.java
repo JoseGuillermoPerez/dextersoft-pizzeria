@@ -2,6 +2,7 @@ package com.dextersoft.pizzeria.web.controller;
 
 import com.dextersoft.pizzeria.persistence.entity.PizzaEntity;
 import com.dextersoft.pizzeria.service.PizzaService;
+import com.dextersoft.pizzeria.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +100,18 @@ public class PizzaController {
   @GetMapping("/cheapest/{price}")
   public ResponseEntity<List<PizzaEntity>> getCheapestPizzas(@PathVariable double price) {
     return ResponseEntity.ok(this.pizzaService.getCheapest(price));
+  }
+
+  @PutMapping("update/price")
+  public ResponseEntity<PizzaEntity> updatePrice(
+      @RequestBody UpdatePizzaPriceDto updatePizzaPriceDto) {
+
+    if (this.pizzaService.exists(updatePizzaPriceDto.getPizzaId())) {
+      this.pizzaService.updatePrice(updatePizzaPriceDto);
+      return ResponseEntity.ok().build();
+    }
+
+    return ResponseEntity.badRequest().build();
   }
 
 }
