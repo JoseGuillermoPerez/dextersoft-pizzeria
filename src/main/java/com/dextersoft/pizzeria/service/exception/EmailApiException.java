@@ -1,2 +1,9 @@
-package com.dextersoft.pizzeria.service.exception;public class EmailApiException {
+package com.dextersoft.pizzeria.service.exception;
+
+public class EmailApiException extends RuntimeException {
+
+  public EmailApiException() {
+    super("Error sending email...");
+  }
+
 }
