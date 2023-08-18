@@ -19,4 +19,12 @@ public class CustomerService {
     return this.customerRepository.findByPhone(phone);
   }
 
+  public CustomerEntity save(CustomerEntity customer) {
+    return this.customerRepository.save(customer);
+  }
+
+  public boolean exists(String idCustomer) {
+    return this.customerRepository.existsById(idCustomer);
+  }
+
 }
