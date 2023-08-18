@@ -4,10 +4,9 @@ import com.dextersoft.pizzeria.persistence.entity.CustomerEntity;
 import com.dextersoft.pizzeria.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/customers")
@@ -24,4 +23,16 @@ public class CustomerController {
   public ResponseEntity<CustomerEntity> getByPhone(@PathVariable String phone) {
     return ResponseEntity.ok(this.customerService.findByPhone(phone));
   }
+
+  @PostMapping
+  public ResponseEntity<CustomerEntity> add(@RequestBody CustomerEntity customer) {
+
+    if (Objects.isNull(customer.getIdCustomer()) || !this.customerService.exists(
+        customer.getIdCustomer())) {
+      return ResponseEntity.ok(this.customerService.save(customer));
+    }
+
+    return ResponseEntity.badRequest().build();
+  }
+
 }
